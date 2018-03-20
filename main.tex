@@ -1,0 +1,304 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+\usepackage[left=2cm, right=2.60cm, top=2cm, bottom=2.50cm]{geometry}
+\usepackage[txtcentered=true, height=40pt, width=70pt]{thumbs}
+\usepackage[german]{babel}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{subcaption}
+\usepackage{tikz-cd}
+\usepackage[justification=centering]{caption}
+
+\newcommand{\fancythumb}[2]{
+	\addthumb{#1}{\large\sffamily\textbf{\space\space#1\vspace{5pt}}}{white}{#2}
+}
+
+\newcommand{\fancyformula}[2]{
+	\small\raggedright{\sffamily\textbf{#1}}
+	#2
+}
+
+\newcommand{\ftransform}{
+	~\xrightarrow{~\mathcal{F}~}~
+}
+\newcommand{\ztransform}{
+	~\xrightarrow{~\mathcal{Z}~}~
+}
+\newcommand{\ztransformOneSided}{
+	~\xrightarrow{~\mathcal{Z^{+}}~}~
+}
+
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\rect}{rect}
+\DeclareMathOperator{\tri}{tri}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\asin}{asin}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\pagenumbering{arabic}
+\titleformat*{\section}{\sffamily\Large\bfseries}
+\titleformat*{\subsection}{\sffamily\large\bfseries}
+\titleformat*{\subsubsection}{\sffamily\normalsize\bfseries}
+
+\begin{document}
+\section*{Zweiseitige $z$-Transformation}
+\subsection*{Definition}
+\vspace{-1.5em}
+\begin{multicols}{2}
+	\noindent
+	\[ x(n)\ztransform X(z)=\sum_{n=-\infty}^{\infty}x(n)\cdot z^{-n} \]
+	\[x(n)=\frac{1}{2\pi j}\oint_{C}X(z)\cdot z^{n-1}dz \]
+\end{multicols}
+
+\subsection*{Eigenschaften}
+\vspace{-1.5em}
+\begin{multicols}{2}
+	\fancyformula{Spiegelung}{
+		\[ x(-n) \ztransform X \left(z^{-1} \right) \]
+		\footnotesize Wenn für $X(z)$ gilt $\mathrm{KB} = \{ z ~ | ~ r < |z| < r_2 \}$, dann ist nun $\mathrm{KB} = \left \{ z ~ | ~ \frac{1}{r_2} < |z| < \frac{1}{r_1} \right \}$.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Konjugiert komplex}{
+		\[ x^{*}(n)\ztransform X^{*}(z^{*}) \]
+		\footnotesize Keine Änderung des KB.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Linearität}{
+		\[ \sum_i c_i ~ x_i(n) \ztransform \sum_i c_i ~ X_i(z) \]
+		\footnotesize Mindestens $\mathrm{KB} = \bigcap_i \mathrm{KB}_i$.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Verschiebung}{
+		\[ x(n-k) \ztransform z^{-k} ~ X(z) \]
+		\footnotesize Bleibt gleich, bis auf: $z = 0$ fällt weg für $k > 0$ und $z = \infty$ fällt weg für $k < 0$.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Dehnung in $z$-Ebene}{
+		\[ a^n ~ x(n) \ztransform X\left(\frac{z}{a}\right) \quad \text{mit} ~ a \neq 0 \]
+		\footnotesize Wenn für $X(z)$ gilt $\mathrm{KB} = \{ z ~ | ~ r < |z| < r_2 \}$, dann ist nun $\mathrm{KB} = \left \{ z ~ | ~ |a| ~ r_1 < |z| < |a| ~ r_2 \right \}$.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Differentiation}{
+		\[ n ~ x(n) \ztransform -z ~ \frac{\mathrm d}{\mathrm dz} ~ X(z) \]
+		\footnotesize Keine Änderung des KB, sofern $X(z)$ rational.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Faltung}{
+		\[ (x_1 * x_2)(n) \ztransform X_{1}(z) ~ X_{2}(z)\]
+		\footnotesize Mindestens $\mathrm{KB} = \mathrm{KB}_1 \cap \mathrm{KB}_2$.
+		\vspace{0.5em}
+	}
+
+	\fancyformula{Moment}{
+		\[ \sum_{n=-\infty}^{\infty} n ~ x(n) = -z ~ \frac{\mathrm d}{\mathrm dz} ~ X(z) \bigg|_{z=1} \]
+	}
+
+	\fancyformula{Anfangswert}{
+		\[
+			x(0) = \begin{cases}
+				X(\infty) & \text{wenn $x(n)$ rechtsseitig ist} \\
+				X(0) & \text{wenn $x(n)$ linksseitig ist}
+			\end{cases}
+		\]
+	}
+
+	{\small\raggedright\sffamily\textbf{Eindeutigkeit}}
+	\[
+		\begin{tikzcd}[every arrow/.append style={shift left}, column sep = 9em]
+			x(n) \arrow{r}{\text{eindeutig}} & X(z) \arrow{l}{\text{nur mit\newline KB eindeutig}}
+		\end{tikzcd}
+	\]
+
+	\fancyformula{Fouriertransformation}{
+		\[ X(e^{j\omega}) := \sum_{n = -\infty}^{\infty} x(n) ~ e^{j\omega n} \overset{!}{=} X(z = e^{j\omega}) \]
+	}
+\end{multicols}
+
+\subsection*{Wichtige zweiseitige $z$-Transformationen}
+\begin{center}
+	\setlength\extrarowheight{8pt}
+	\begin{longtable}{r c l l}
+		$x(n)$ & $\ztransform$ & $ X(z)$ & Konvergenzbereich KB \\ \hline
+		$\delta(n)$ & $\ztransform$ & $1$ & $\mathbb{C}$ \\
+		$\delta(n-k)$ & $\ztransform$ & $z^{-k}$ & $\mathbb C \setminus \{0\} ~ \text{wenn} ~ k > 0$ \\
+		&&&$\mathbb C \setminus \{\infty\} ~ \text{wenn} ~ k < 0$ \\
+		$a^n ~ u(n)$ & $\ztransform$ & $\dfrac{1}{1 - az^{-1}}$ & $|z| > |a|$ \\
+		$-a^n ~ u(-n-1)$ & $\ztransform$ & $\dfrac{1}{1 - az^{-1}}$ & $|z| < |a|$ \\
+		$n ~ a^n ~ u(n)$ & $\ztransform$ & $\dfrac{az^{-1}}{(1 - az^{-1})^2}$ & $|z| > |a|$ \\
+		$-n ~ a^n ~ u(-n-1)$ & $\ztransform$ & $\dfrac{az^{-1}}{(1 - az^{-1})^2}$ & $|z| < |a|$ \\
+		$d_k(n) ~ a^n ~ u(n)$ & $\ztransform$ & $\dfrac{1}{(1-az^{-1})^k}$ & $|z| > |a|$ \\
+		$-d_k(n) ~ a^{n} ~ u(-n-k)$ & $\ztransform$ & $\dfrac{1}{(1-az^{-1})^k}$ & $|z| < |a|$ \\
+		$a^{|n|}$ & $\ztransform$ & $\dfrac{1-a^2}{(1-az^{-1})(1-az)}$ & $|a|<|z|<\frac{1}{|a|}$ \\
+		$a^n \cos(\omega_{0}n) ~ u(n)$ & $\ztransform$ & $\dfrac{1 - a ~ \cos(\omega_0) ~ z^{-1}}{1-2 a ~ \cos(\omega_{0}) ~ z^{-1} + a^2 ~ z^{-2}}$ & $|z| > |a|$ \\
+		$a^n ~ \sin(\omega_0 n) ~ u(n)$ & $\ztransform$ & $\dfrac{a ~ \sin(\omega_{0}) ~ z^{-1}}{1 - 2 a ~ \cos(\omega_{0}) ~ z^{-1} + a^2 ~ z^{-2}}$ & $|z| > |a|$ \\
+		$\dfrac{1}{n!} ~ u(n)$ & $\ztransform$ & $e^{z^{-1}}$ & $\mathbb C \setminus \{0\}$
+	\end{longtable}
+\end{center}
+
+Mit Abkürzung: $d_{1}(n)=1$, $d_{2}(n)=n+1$, $d_{3}(n)=\frac{(n+1)(n+2)}{2}$, d$_{k}(n)=\sum_{i=0}^{n}d_{k-1}(i)$
+
+\subsection*{Rationale $z$-Transformierte}
+\begin{multicols}{2}
+	\fancyformula{Definition}{
+	\[X(z)=\dfrac{B(z)}{A(z)}=\dfrac{b_{0}+b_{1}z^{-1}+\cdots+b_{M}z^{-M}}{a_{0}+a_{1}z^{-1}+\cdots+a_{N}z^{-N}}\]
+	}
+	\fancyformula{Polstellen $p_{i}$}{
+		\[X(z=p_{i})=\infty\]
+	}
+	\fancyformula{Nullstellen $n_{i}$}{
+	\[X(z=n_{i})=0\]
+	}
+	\fancyformula{Pol-Nullstellen-Zerlegung}{
+	\[X(z)=\frac{b_{0}}{a_{0}}z^{N-M}\dfrac{(z-n_{1})\cdot...\cdot(z-n_{M})}{(z-p_{1})\cdot...\cdot(z-p_{N})}\]
+	\[\begin{cases}
+	\text{M nicht triviale Nullstellen } n_{1},...,n_{M}\\
+	\text{N nicht triviale Polstellen } p_{1},...,p_{N}
+	\end{cases}\]
+	\[+\begin{cases}
+	N>M\text{: N-M triviale Nullstellen an z=0}\\
+	N<M \text{: N-M triviale Polstellen an z=0}
+	\end{cases}\]
+	}
+	\fancyformula{Eigenschaften}{
+	\begin{enumerate}
+		\item keine Polstellen im KB von $X(z)$
+		\item ein Pol-Nullstellen-Diagramm legt $X(z)$ bis auf eine \textbf{Skalierung} fest
+	\end{enumerate}
+	}
+	\fancyformula{Zeitverhalten von Polstellen}{
+	Wenn $x(n)$ \textcolor{teal}{rechtsseitig}/\textcolor{red}{linksseitig} ist und wenn:
+	\begin{itemize}
+		\item Polstellen \textcolor{teal}{innerhalb}/\textcolor{red}{linksseitig} des Einheitskreises liegen dann klingt $|x(n)|$ ab
+		\item Polstellen \textcolor{teal}{außerhalb}/\textcolor{red}{innerhalb} des Einheitskreises liegen dann wächst $|x(n)|$ unbeschränkt
+		\item einfache Polstellen auf dem Einheitskreis liegen dann bleibt $|x(n)|$ beschränkt
+		\item mehrfache Polstellen auf dem Einheitskreis liegen dann wächst $|x(n)|$ unbeschränkt
+		\item je kleiner der Abstand von Polstellen zum Einheitskreis ist, desto langsamer das Abklingen/Wachsen von  $|x(n)|$
+		\item je größer der Abstand von Polstellen zum Einheitskreis ist, desto schneller das Abklingen/Wachsen von $|x(n)|$
+	\end{itemize}
+	}
+	\fancyformula{Pol-Nullstellen Kürzung}{
+	\[\text{Wenn gilt } p_{i}=n_{j}\]
+	Effekte: \\
+	reduzierte Systemordnung\\
+	mögliche Änderung von Stabilität und Konvergenzbereich
+	}
+\end{multicols}
+\subsection*{Rücktransformation}
+\begin{multicols}{2}
+	\fancyformula{Potenzreihen-Entwicklung}{
+		\[X(z)\overset{!}{=} \sum_{n}^{}x(n)z^{-n}\text{ direktes Ablesen von $x(n)$}\]
+	}
+	\fancyformula{Partialbruchzerlegung}{
+		\begin{enumerate}
+			\item Polynomdivision falls $M>N$
+			\item einfache Polstellen bzw. mehrfache Polstellen-Ansatz anwenden
+		\end{enumerate}
+	}
+	\fancyformula{einfache Polstellen-Ansatz}{
+	\[\frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{N}}{1-p_{N}z^{-1}}\]
+	\[c_{i}=\frac{\beta(z^{-1})}{\alpha(z^{-1})}(1-p_{i}z^{-1})|_{z=p_{i}}\]
+	}
+	\fancyformula{m-fache Polstellen-Ansatz}{
+	\[\frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{m}}{(1-p_{1}z^{-1})^m}\]
+	\[\gamma(w)=\frac{\beta(z^{-1})}{\alpha(z^{-1})}(1-p_{1}z^{-1})^m|_{z^{-1}=w}\]
+	\[c_{m-1}=\frac{1}{i!(-p_{1})^{i}}\frac{d^{i}\gamma(w)}{dw^{i}}|_{w=p_{1}^{-1}}\]
+	}
+\end{multicols}
+\subsection*{LTI-Systeme und z-Transformation}
+\subsection*{Übertragungsfunktion}
+\begin{multicols}{2}
+	
+	\[y(n)=(h*x)(n)\ztransform Y(z)=H(z)X(z)\]
+	\[H(z)=\frac{Y(z)}{X(z)}=\frac{\beta(z^{-1})}{\alpha(z^{-1})}\]
+	Differenzengleichung im Zeitbereich $\leftrightarrow H(z)$ rational mit Pol-und Nullstellen\\
+\end{multicols}
+\subsection*{BIBO-Stabilität}
+	\begin{multicols}{2}
+		\fancyformula{Definition}{
+		System BIBO stabil $\leftrightarrow$ KB von $H(z)$ enthält den Einheitskreis $|z|=1$\\
+		}
+		\fancyformula{kausal und BIBO stabil}{
+		\begin{itemize}
+		\item $|p_{i}|<1$
+		\item KB:$|z|>r$
+		\item keine Pole $p_{i}$ innerhalb des KB
+		\end{itemize}
+		\[\text{KB:}|z|>\max_{i}|p_{i}|\]
+		}
+		\fancyformula{antikausal und BIBO stabil}{
+			\begin{itemize}
+				\item $p_{i}>1$
+				\item $\text{KB: } |z|<r$
+			\end{itemize}
+		\[\text{KB:}|z|<\min_{i}|p_{i}|\]
+		}
+	\end{multicols}
+\section*{einseitige z-Transformation}
+\subsection*{Definition}
+\begin{multicols}{2}
+	\fancyformula{Hintransformation}{
+	\[x(n) \ztransformOneSided \sum_{n=\textcolor{red}{0}}^{\infty}x(n)z^{-n}\]
+	}
+	\fancyformula{Rücktransformation}{
+	\[x(n)=\frac{1}{2\pi j}\oint_{C}X^{+}(z)z^{n-1}dz \text{ mit }n \geq 0\]
+	}
+\end{multicols}
+\subsection*{Eigenschaften}
+\begin{multicols}{2}
+	 \fancyformula{Spiegelung}{
+ 	\[x(-n) \ztransformOneSided \text{nicht definiert}\]
+	}
+	\fancyformula{konjugiert komplex}{
+	\[x^{*}(n) \ztransformOneSided X^{+*}(z^{*})\]
+	}
+	\fancyformula{Linearität}{
+	\[\sum_{i}^{}c_{i}x_{i}(n)\ztransformOneSided \sum_{i}^{}c_{i}X^{+}_{i}(z)\]
+	}
+	\fancyformula{Verschiebung mit $k>0$}{
+	\[x(n-k)\ztransformOneSided z^{-k}\left[X^{+}(z)+\textcolor{red}{\sum_{n=-k}^{-1}x(n)z^{-n}}\right]\]
+	\[x(n+k)\ztransformOneSided z^{k}\left[X^{+}(z)-\textcolor{red}{\sum_{n=0}^{k-1}x(n)z^{-n}}\right]\]
+	}
+	\fancyformula{Dehnung}{
+	\[a^{n}x(n)\ztransformOneSided X^{+}\left(\frac{z}{a}\right) \text{mit }a\neq 0\]
+	}
+	\fancyformula{Differentiation}{
+	\[nx(n)\ztransformOneSided -z\frac{d}{dz}X^{+}(z)\]
+	}
+	\fancyformula{Moment}{
+	\[\sum_{n=0}^{\infty}nx(n)=-z\frac{d}{dz}X^{+}(z)|_{z=1}\]
+	}
+	\fancyformula{Faltung}{
+	\[(x_{1}*x_{2})(n)\ztransformOneSided X_{1}^{+}(n)X_{2}^{+}(n) \text{ mit $x_{i}(n)$ rechtsseitig}\]
+	}
+	\fancyformula{Anfangswert}{
+	\[x(0)=X(\infty)\]
+	}
+\end{multicols}
+\subsection*{Lösen von Differenzengleichungen}
+\begin{enumerate}
+	\item einseitige z-Transformation der Differenzengleichung mit Anfangsbedingungen
+	\item nach $Y^{+}(z)$ umformen
+	\item durch Rücktransformation $y^{+}(n)$ z.B. mit  Partialbruchzerlegung bestimmen
+	\item  $y(n)$ aus den Anfangsbedingungen und $y^{+}(n)$  bestimmen
+\end{enumerate}
+\end{document}
