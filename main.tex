@@ -65,8 +65,8 @@
 \vspace{-1.5em}
 \begin{multicols}{2}
 	\noindent
-	\[ x(n)\ztransform X(z)=\sum_{n=-\infty}^{\infty}x(n)\cdot z^{-n} \]
-	\[x(n)=\frac{1}{2\pi j}\oint_{C}X(z)\cdot z^{n-1}dz \]
+	\[ x(n)\ztransform X(z) = \sum_{n=-\infty}^{\infty} x(n) ~ z^{-n} \]
+	\[ x(n) = \frac{1}{2\pi j} \oint_C X(z) ~ z^{n-1} ~ \mathrm dz \]
 \end{multicols}
 
 \subsection*{Eigenschaften}
@@ -362,15 +362,15 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 \section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
+\vspace{-1.5em}
 \begin{multicols}{2}
-	\fancyformula{Hintransformation}{
-	\[x(n) \ztransformOneSided \sum_{n=\textcolor{red}{0}}^{\infty}x(n)z^{-n}\]
-	}
-	\fancyformula{Rücktransformation}{
-	\[x(n)=\frac{1}{2\pi j}\oint_{C}X^{+}(z)z^{n-1}dz \text{ mit }n \geq 0\]
-	}
+	\noindent
+	\[ x(n) \ztransformOneSided \sum_{n=\textcolor{red}{0}}^{\infty} x(n) ~ z^{-n} \]
+	\[ x(n) = \frac{1}{2\pi j}\oint_C X^{+}(z) ~ z^{n-1} \mathrm dz ~ \text{mit} ~ \textcolor{red}{n \geq 0}\]
 \end{multicols}
+
 \subsection*{Eigenschaften}
+\vspace{-1.5em}
 \begin{multicols}{2}
 	 \fancyformula{Spiegelung}{
  	\[x(-n) \ztransformOneSided \text{nicht definiert}\]
@@ -408,4 +408,10 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	\item durch Rücktransformation $y^{+}(n)$ z.B. mit  Partialbruchzerlegung bestimmen
 	\item  $y(n)$ aus den Anfangsbedingungen und $y^{+}(n)$  bestimmen
 \end{enumerate}
+
+\section*{Mathematik}
+\subsection*{Summenformeln}
+\[ \sum_{k = M}^{N - 1} q^k = \frac{q^M - q^N}{1 - q}, ~ q \neq 1  \qquad \qquad \sum_{k = 0}^{\infty} q^k = \frac{1}{1 - q}, ~ |q| < 1 \]
+\[ \sum_{k = 1}^{n} k = \frac{n^2 + n}{2} \]
+
 \end{document}
