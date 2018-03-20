@@ -12,6 +12,7 @@
 \usepackage{array}
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{adjustbox}
 \usepackage{float}
 \usepackage[left=2cm, right=2.60cm, top=2cm, bottom=2.50cm]{geometry}
 \usepackage[txtcentered=true, height=40pt, width=70pt]{thumbs}
@@ -35,6 +36,9 @@
 }
 \newcommand{\ztransform}{
 	~\xrightarrow{~\mathcal{Z}~}~
+}
+\newcommand{\invztransform}{
+	~\xrightarrow{~\mathcal{Z}^{-1}~}~
 }
 \newcommand{\ztransformOneSided}{
 	~\xrightarrow{~\mathcal{Z^{+}}~}~
@@ -135,6 +139,7 @@
 \end{multicols}
 
 \subsection*{Wichtige zweiseitige $z$-Transformationen}
+\vspace{-1.5em}
 \begin{center}
 	\setlength\extrarowheight{8pt}
 	\begin{longtable}{r c l l}
@@ -158,72 +163,99 @@
 Mit Abkürzung: $d_{1}(n)=1$, $d_{2}(n)=n+1$, $d_{3}(n)=\frac{(n+1)(n+2)}{2}$, d$_{k}(n)=\sum_{i=0}^{n}d_{k-1}(i)$
 
 \subsection*{Rationale $z$-Transformierte}
+\vspace{-1.5em}
 \begin{multicols}{2}
 	\fancyformula{Definition}{
-	\[X(z)=\dfrac{B(z)}{A(z)}=\dfrac{b_{0}+b_{1}z^{-1}+\cdots+b_{M}z^{-M}}{a_{0}+a_{1}z^{-1}+\cdots+a_{N}z^{-N}}\]
+		\[ X(z) = \dfrac{B(z)}{A(z)} = \dfrac{b_0 + b_1 z^{-1} + \cdots + b_M z^{-M}}{a_0 + a_1 z^{-1} + \cdots + a_N z^{-N}} \]
 	}
-	\fancyformula{Polstellen $p_{i}$}{
-		\[X(z=p_{i})=\infty\]
+
+	\fancyformula{Polstellen $p_i$ und Nullstellen $n_i$}{
+		\[ X(z = p_i) = \infty ~ \Leftrightarrow ~ B(p_i) = \infty ~ \text{oder} ~ A(p_i) = 0 \]
+		\[ X(z = n_i) = 0 ~ \Leftrightarrow ~ B(n_i) = 0 ~ \text{oder} ~ A(n_i) = \infty \]
 	}
-	\fancyformula{Nullstellen $n_{i}$}{
-	\[X(z=n_{i})=0\]
-	}
-	\fancyformula{Pol-Nullstellen-Zerlegung}{
-	\[X(z)=\frac{b_{0}}{a_{0}}z^{N-M}\dfrac{(z-n_{1})\cdot...\cdot(z-n_{M})}{(z-p_{1})\cdot...\cdot(z-p_{N})}\]
-	\[\begin{cases}
-	\text{M nicht triviale Nullstellen } n_{1},...,n_{M}\\
-	\text{N nicht triviale Polstellen } p_{1},...,p_{N}
-	\end{cases}\]
-	\[+\begin{cases}
-	N>M\text{: N-M triviale Nullstellen an z=0}\\
-	N<M \text{: N-M triviale Polstellen an z=0}
-	\end{cases}\]
-	}
+
 	\fancyformula{Eigenschaften}{
-	\begin{enumerate}
-		\item keine Polstellen im KB von $X(z)$
-		\item ein Pol-Nullstellen-Diagramm legt $X(z)$ bis auf eine \textbf{Skalierung} fest
-	\end{enumerate}
+		\begin{itemize}
+			\item Keine Polstellen im KB von $X(z)$
+			\item Ein Pol-Nullstellen-Diagramm legt $X(z)$ bis auf eine \textbf{Skalierung} fest
+		\end{itemize}
 	}
-	\fancyformula{Zeitverhalten von Polstellen}{
-	Wenn $x(n)$ \textcolor{teal}{rechtsseitig}/\textcolor{red}{linksseitig} ist und wenn:
+
+	\fancyformula{Pol-Nullstellen-Zerlegung}{
+		\[
+			X(z) = \frac{b_{0}}{a_{0}} ~ z^{N-M} ~ \frac{(z-n_{1})\cdot \ldots \cdot(z-n_{M})}{(z-p_{1})\cdot \ldots \cdot(z-p_{N})}
+		\]
+
+		\begin{align*}
+			\Rightarrow & \begin{cases}
+				\text{M nicht triviale Nullstellen } n_{1},...,n_{M}\\
+				\text{N nicht triviale Polstellen } p_{1},...,p_{N}
+			\end{cases}\\
+			+ & \begin{cases}
+				N > M\text{: $N - M$ triviale Nullstellen an $z = 0$}\\
+				N < M \text{: $M - N$ triviale Polstellen an $z = 0$}
+			\end{cases}
+		\end{align*}
+	}
+
+	{\small\raggedright\sffamily\textbf{Pol-Nullstellen-Kürzung für $p_i = n_j$}}
+
 	\begin{itemize}
-		\item Polstellen \textcolor{teal}{innerhalb}/\textcolor{red}{linksseitig} des Einheitskreises liegen dann klingt $|x(n)|$ ab
-		\item Polstellen \textcolor{teal}{außerhalb}/\textcolor{red}{innerhalb} des Einheitskreises liegen dann wächst $|x(n)|$ unbeschränkt
-		\item einfache Polstellen auf dem Einheitskreis liegen dann bleibt $|x(n)|$ beschränkt
-		\item mehrfache Polstellen auf dem Einheitskreis liegen dann wächst $|x(n)|$ unbeschränkt
-		\item je kleiner der Abstand von Polstellen zum Einheitskreis ist, desto langsamer das Abklingen/Wachsen von  $|x(n)|$
-		\item je größer der Abstand von Polstellen zum Einheitskreis ist, desto schneller das Abklingen/Wachsen von $|x(n)|$
+		\item Reduzierte Systemordnung
+		\item Mögliche Änderung von Stabilität und KB
 	\end{itemize}
-	}
-	\fancyformula{Pol-Nullstellen Kürzung}{
-	\[\text{Wenn gilt } p_{i}=n_{j}\]
-	Effekte: \\
-	reduzierte Systemordnung\\
-	mögliche Änderung von Stabilität und Konvergenzbereich
-	}
+
+
+	% TODO: Zu viel Text, zu lang
+	%{\small\raggedright\sffamily\textbf{Zeitverhalten von Polstellen}}
+	%
+	%Wenn $x(n)$ \textcolor{teal}{rechtsseitig} / \textcolor{red}{linksseitig} ist und wenn:
+	%\begin{itemize}
+	%	\item Polstellen \textcolor{teal}{innerhalb} / \textcolor{red}{außerhalb} des Einheitskreises liegen, dann klingt $|x(n)|$ ab
+	%	\item Polstellen \textcolor{teal}{außerhalb} / \textcolor{red}{innerhalb} des Einheitskreises liegen, dann wächst $|x(n)|$ unbeschränkt
+	%	\item Einfache Polstellen auf dem Einheitskreis liegen, dann bleibt $|x(n)|$ beschränkt
+	%	\item Mehrfache Polstellen auf dem Einheitskreis liegen, dann wächst $|x(n)|$ unbeschränkt
+	%	\item Je kleiner der Abstand von Polstellen zum Einheitskreis ist, desto langsamer das Abklingen/Wachsen von  $|x(n)|$
+	%	\item Je größer der Abstand von Polstellen zum Einheitskreis ist, desto schneller das Abklingen/Wachsen von $|x(n)|$
+	%\end{itemize}
 \end{multicols}
-\subsection*{Rücktransformation}
-\begin{multicols}{2}
-	\fancyformula{Potenzreihen-Entwicklung}{
-		\[X(z)\overset{!}{=} \sum_{n}^{}x(n)z^{-n}\text{ direktes Ablesen von $x(n)$}\]
-	}
-	\fancyformula{Partialbruchzerlegung}{
-		\begin{enumerate}
-			\item Polynomdivision falls $M>N$
-			\item einfache Polstellen bzw. mehrfache Polstellen-Ansatz anwenden
-		\end{enumerate}
-	}
-	\fancyformula{einfache Polstellen-Ansatz}{
-	\[\frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{N}}{1-p_{N}z^{-1}}\]
-	\[c_{i}=\frac{\beta(z^{-1})}{\alpha(z^{-1})}(1-p_{i}z^{-1})|_{z=p_{i}}\]
-	}
-	\fancyformula{m-fache Polstellen-Ansatz}{
-	\[\frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{m}}{(1-p_{1}z^{-1})^m}\]
-	\[\gamma(w)=\frac{\beta(z^{-1})}{\alpha(z^{-1})}(1-p_{1}z^{-1})^m|_{z^{-1}=w}\]
-	\[c_{m-1}=\frac{1}{i!(-p_{1})^{i}}\frac{d^{i}\gamma(w)}{dw^{i}}|_{w=p_{1}^{-1}}\]
-	}
-\end{multicols}
+
+\subsection*{Rücktransformation $X(z) \invztransform x(n)$}
+\subsubsection*{Möglichkeit 1: Ablesen mit Potenzreihenenwicklung}
+Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
+\[
+	X(z) \overset{!}{=} \sum_n x(n) ~ z^{-n} ~ \Rightarrow ~ \text{ dann direktes Ablesen von $x(n)$}
+\]
+
+\subsubsection*{Möglichkeit 2: Partialbruchzerlegung für rationale $z$-Transformierte}
+\[
+	\text{Sei} ~ X(z) = \frac{\beta(z^{-1})}{\alpha(z^{-1})} ~ \text{rationale $z$-Transformierte}
+\]
+
+\begin{enumerate}
+\item \textbf{Polynomdivision} falls Zählergrad $\geq$ Nennergrad!
+\item \textbf{Partialbruchzerlegung} und Bestimmung der Koeffizienten wie herkömmlich oder mit Regeln:
+\begin{figure}[H]
+	\centering
+	\setlength{\fboxsep}{10pt}
+	\begin{adjustbox}{valign=h,center=0.42\textwidth,margin=1ex,minipage=[t][][t]{0.37\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		Koeffizient $c_i$ für \textbf{einfache Polstelle} $p_i$
+		\[ \frac{\beta(z^{-1})}{\alpha(z^{-1})} = \frac{c_1}{1 - p_1 z^{-1}} + \cdots + \frac{c_N}{1 - p_N z^{-1}} \]
+		\[ c_i = \frac{\beta(z^{-1})}{\alpha(z^{-1})} ~ (1 - p_i z^{-1}) \bigg |_{z = p_{i}} \]
+		\vspace{3.8em}
+	\end{adjustbox}
+	\begin{adjustbox}{valign=h,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		Koeffizienten $c_1, \ldots, c_m$ für \textbf{m-fache Polstellen} $p_1, \ldots, p_m$
+		\[ \frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{m}}{(1-p_{1}z^{-1})^m} + \ldots \]
+		\[ c_{m - i} = \frac{1}{i! ~ (-p_1)^{i}}\frac{\mathrm d^{i} \gamma(w)}{\mathrm d w^{i}} \bigg |_{w = p_1^{-1}} \text{mit} ~ 0 \leq i < m \]
+		\[ \gamma(w) := \frac{\beta(z^{-1})}{\alpha(z^{-1})} ~ \left(1 - p_1 z^{-1} \right)^m \bigg |_{z^{-1} = w} \]
+	\end{adjustbox}
+\end{figure}
+
+\item \textbf{Rücktransformation} mittels Tabelle bekannter $z$-Transformationen
+
+\end{enumerate}
+
 \subsection*{LTI-Systeme und z-Transformation}
 \subsection*{Übertragungsfunktion}
 \begin{multicols}{2}
