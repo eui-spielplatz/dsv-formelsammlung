@@ -102,7 +102,7 @@
 		\vspace{0.5em}
 	}
 
-	\fancyformula{Differentiation}{
+	\fancyformula{Differentiation in $z$-Ebene}{
 		\[ n ~ x(n) \ztransform -z ~ \frac{\mathrm d}{\mathrm dz} ~ X(z) \]
 		\footnotesize Keine Änderung des KB, sofern $X(z)$ rational.
 		\vspace{0.5em}
@@ -365,48 +365,61 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \vspace{-1.5em}
 \begin{multicols}{2}
 	\noindent
-	\[ x(n) \ztransformOneSided \sum_{n=\textcolor{red}{0}}^{\infty} x(n) ~ z^{-n} \]
+	\[ x(n) \ztransformOneSided \sum_{n = \textcolor{red}{0}}^{\infty} x(n) ~ z^{-n} \]
 	\[ x(n) = \frac{1}{2\pi j}\oint_C X^{+}(z) ~ z^{n-1} \mathrm dz ~ \text{mit} ~ \textcolor{red}{n \geq 0}\]
 \end{multicols}
 
 \subsection*{Eigenschaften}
 \vspace{-1.5em}
 \begin{multicols}{2}
-	 \fancyformula{Spiegelung}{
- 	\[x(-n) \ztransformOneSided \text{nicht definiert}\]
+	\fancyformula{Spiegelung}{
+ 		\[ x(-n) \ztransformOneSided \text{nicht definiert} \]
 	}
+
 	\fancyformula{konjugiert komplex}{
-	\[x^{*}(n) \ztransformOneSided X^{+*}(z^{*})\]
+		\[ x^{*}(n) \ztransformOneSided X^{+*}(z^{*}) \]
 	}
+
 	\fancyformula{Linearität}{
-	\[\sum_{i}^{}c_{i}x_{i}(n)\ztransformOneSided \sum_{i}^{}c_{i}X^{+}_{i}(z)\]
+		\[ \sum_i c_i ~ x_i(n) \ztransformOneSided \sum_i c_{i} ~ X^{+}_i(z) \]
 	}
-	\fancyformula{Verschiebung mit $k>0$}{
-	\[x(n-k)\ztransformOneSided z^{-k}\left[X^{+}(z)+\textcolor{red}{\sum_{n=-k}^{-1}x(n)z^{-n}}\right]\]
-	\[x(n+k)\ztransformOneSided z^{k}\left[X^{+}(z)-\textcolor{red}{\sum_{n=0}^{k-1}x(n)z^{-n}}\right]\]
+
+	\fancyformula{Verschiebung mit $k > 0$}{
+		\[ x(n - k) \ztransformOneSided z^{-k} \left[X^{+}(z) + \textcolor{red}{\sum_{n = -k}^{-1} x(n) ~ z^{-n}}\right] \]
+		\[ x(n + k) \ztransformOneSided z^k \left[X^{+}(z) - \textcolor{red}{\sum_{n = 0}^{k-1} x(n) ~ z^{-n}}\right] \]
 	}
-	\fancyformula{Dehnung}{
-	\[a^{n}x(n)\ztransformOneSided X^{+}\left(\frac{z}{a}\right) \text{mit }a\neq 0\]
+	\fancyformula{Dehnung in $z$-Ebene}{
+		\[ a^n ~ x(n) \ztransformOneSided X^+\left(\frac{z}{a}\right) ~ \text{mit} ~ a \neq 0\]
 	}
-	\fancyformula{Differentiation}{
-	\[nx(n)\ztransformOneSided -z\frac{d}{dz}X^{+}(z)\]
+
+	\fancyformula{Differentiation in $z$-Ebene}{
+		\[ n ~ x(n)\ztransformOneSided -z ~ \frac{\mathrm d}{\mathrm dz} X^+(z) \]
 	}
-	\fancyformula{Moment}{
-	\[\sum_{n=0}^{\infty}nx(n)=-z\frac{d}{dz}X^{+}(z)|_{z=1}\]
-	}
+
 	\fancyformula{Faltung}{
-	\[(x_{1}*x_{2})(n)\ztransformOneSided X_{1}^{+}(n)X_{2}^{+}(n) \text{ mit $x_{i}(n)$ rechtsseitig}\]
+		\[ (x_1 * x_2)(n) \ztransformOneSided X_1^+(z) ~ X_2^+(z) ~ \text{mit \textcolor{red}{$x_{i}(n)$ rechtsseitig}} \]
 	}
+
+	\fancyformula{Moment}{
+		\[ \sum_{n = \textcolor{red}{0}}^{\infty} n ~ x(n) = -z ~ \frac{\mathrm d}{\mathrm dz} X^{+}(z) \bigg |_{z = 1} \]
+	}
+
 	\fancyformula{Anfangswert}{
 	\[x(0)=X(\infty)\]
 	}
 \end{multicols}
 \subsection*{Lösen von Differenzengleichungen}
 \begin{enumerate}
-	\item einseitige z-Transformation der Differenzengleichung mit Anfangsbedingungen
-	\item nach $Y^{+}(z)$ umformen
-	\item durch Rücktransformation $y^{+}(n)$ z.B. mit  Partialbruchzerlegung bestimmen
-	\item  $y(n)$ aus den Anfangsbedingungen und $y^{+}(n)$  bestimmen
+	\item Differenzengleichung einseitig $z$-transformieren und Anfangsbedingungen einsetzen
+	\[
+		y(n) \ztransformOneSided Y^+(z), \quad y(n - 1) \ztransformOneSided z^{-1} ~ Y^+(z) ~ + ~ y(-1), \quad y(n - 2) = z^{-2} ~ Y^+(z) ~ + ~ z^{-1} ~ y(-1) ~ + ~ y(-2),
+	\]
+	\[
+		y(n - 3) = z^{-3} ~ Y^+(z) ~ + ~ z^{-2} ~ y(-1) ~ + ~ z^{-1} ~ y(-2) ~ + ~ y(-3), ~ \text{usw.}
+	\]
+	\item Einseitige $z$-Transformierte nach $Y^+(z)$ umformen
+	\item Durch Rücktransformation $y^+(n)$ bestimmen, z.B. mit Partialbruchzerlegung
+	\item  $y(n)$ aus Anfangsbedingungen und $y^+(n)$  bestimmen
 \end{enumerate}
 
 \section*{Mathematik}
