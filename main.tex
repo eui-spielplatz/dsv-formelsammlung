@@ -256,35 +256,25 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 \end{enumerate}
 
-\subsection*{LTI-Systeme und z-Transformation}
-\subsection*{Übertragungsfunktion}
-\begin{multicols}{2}
-	
-	\[y(n)=(h*x)(n)\ztransform Y(z)=H(z)X(z)\]
-	\[H(z)=\frac{Y(z)}{X(z)}=\frac{\beta(z^{-1})}{\alpha(z^{-1})}\]
+\subsection*{LTI-Systeme und $z$-Transformation}
+\subsubsection*{Übertragungsfunktion}
+\[
+	y(n) = (h * x)(n) \ztransform Y(z) = H(z) ~ X(z)
+\]
+\[
+	H(z) = \frac{Y(z)}{X(z)} = \frac{\beta(z^{-1})}{\alpha(z^{-1})}
+\]
 	Differenzengleichung im Zeitbereich $\leftrightarrow H(z)$ rational mit Pol-und Nullstellen\\
-\end{multicols}
-\subsection*{BIBO-Stabilität}
-	\begin{multicols}{2}
-		\fancyformula{Definition}{
-		System BIBO stabil $\leftrightarrow$ KB von $H(z)$ enthält den Einheitskreis $|z|=1$\\
-		}
-		\fancyformula{kausal und BIBO stabil}{
-		\begin{itemize}
-		\item $|p_{i}|<1$
-		\item KB:$|z|>r$
-		\item keine Pole $p_{i}$ innerhalb des KB
-		\end{itemize}
-		\[\text{KB:}|z|>\max_{i}|p_{i}|\]
-		}
-		\fancyformula{antikausal und BIBO stabil}{
-			\begin{itemize}
-				\item $p_{i}>1$
-				\item $\text{KB: } |z|<r$
-			\end{itemize}
-		\[\text{KB:}|z|<\min_{i}|p_{i}|\]
-		}
-	\end{multicols}
+
+\subsubsection*{BIBO-Stabilität}
+\begin{align*}
+	& \text{System ist BIBO-stabil} \\
+	\Leftrightarrow \quad & \textstyle \sum_{n=-\infty}^\infty |h(n)| < \infty
+	& \Leftrightarrow \quad & \text{$h(n)$ ist kausal und $|p_i| < 1 ~ \forall i$} \\
+	\Leftrightarrow \quad & \text{KB von $H(z)$ enthält den Einheitskreis $|z| = 1$}
+	& \Leftrightarrow \quad & \text{$h(n)$ ist antikausal und $|p_i| > 1 ~ \forall i$}
+\end{align*}
+
 \section*{einseitige z-Transformation}
 \subsection*{Definition}
 \begin{multicols}{2}
