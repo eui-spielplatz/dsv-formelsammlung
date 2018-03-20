@@ -19,6 +19,7 @@
 \usepackage[german]{babel}
 \usepackage[linewidth=1pt]{mdframed}
 \usepackage{subcaption}
+\usepackage{pst-sigsys,pst-plot,pstricks-add}
 \usepackage{tikz-cd}
 \usepackage[justification=centering]{caption}
 
@@ -275,7 +276,91 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	& \Leftrightarrow \quad & \text{$h(n)$ ist antikausal und $|p_i| > 1 ~ \forall i$}
 \end{align*}
 
-\section*{einseitige z-Transformation}
+\subsubsection*{Bezeichnungen FIR und IIR}
+\begin{center}
+	\begin{tabular}{r c p{8cm}}
+		\textbf{Bezeichnung} & \textbf{Übertragungsfunktion} & \textbf{Eigenschaften} \\ \hline \\[-1.0em]
+		$\mathrm{FIR}(M)$ & $H(z) = \beta \left(z^{-1} \right)$ & Nichtrekursive Differenzengleichung, endliche Impulsantwort, $\beta \left(z^{-1} \right)$ vom Grad $M$ \\
+		$\mathrm{IIR}(N, 0)$ & $H(z) = \frac{1}{\alpha \left(z^{-1} \right)}$ & Rein rekursive Differenzengleichung, nicht-endliche Impulsantwort, $\alpha \left( z^{-1} \right)$ vom Grad $N$ \\
+		$\mathrm{IIR}(N, M)$ & $H(z) = \frac{\beta \left(z^{-1} \right)}{\alpha \left(z^{-1} \right)}$ & Allgemein rekursive Differenzengleichung, nicht-endliche Impulsantwort, $\beta \left(z^{-1} \right)$ vom Grad $M$, $\alpha \left( z^{-1} \right)$ vom Grad $N$
+	\end{tabular}
+\end{center}
+
+\subsubsection*{Stabilität und Kausalität im Pol-Nullstellen-Diagramm}
+\vspace{-1.5em}
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.33\textwidth}
+		{\footnotesize\raggedright\sffamily\textbf{Stabiles System - Einheitskreis im KB}}
+		\vspace{0.5em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des stabilen Systems
+				\psring[fillcolor=gray!20](0, 0){.75}{2.25}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3,-3)(3,3){$\Re$}{$\Im$}
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1.5}
+				\rput[b]{45}(1.68; 135){{\scriptsize\color{black} Einheitskreis}}
+				\pscircle[style=Dash, linecolor=gray](0, 0){.75}
+				\pspole(.75, 0){p1} \nput{-45}{p1}{$\tfrac{1}{2}$}
+				\pscircle[style=Dash, linecolor=gray](0, 0){2.25}
+				\pspole(-2.25, 0){p2} \nput{225}{p2}{$\scriptstyle-\tfrac{3}{2}$}
+			\end{pspicture}
+		}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.33\textwidth}
+		{\footnotesize\raggedright\sffamily\textbf{Kausales System - KB ist Äußeres}}
+		\vspace{0.5em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.5, 2.5){2.25}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1.5}
+				\rput[b]{45}(1.68; 135){{\scriptsize\color{black} Einheitskreis}}
+				\pscircle[style=Dash, linecolor=gray](0, 0){.75}
+				\pspole(.75, 0){p1} \nput{-45}{p1}{$\tfrac{1}{2}$}
+				\pscircle[style=Dash, linecolor=gray](0, 0){2.25}
+				\pspole(-2.25, 0){p2} \nput{225}{p2}{$\scriptstyle-\tfrac{3}{2}$}
+			\end{pspicture}
+		}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.33\textwidth}
+		{\footnotesize\raggedright\sffamily\textbf{Antikausales System - KB ist Inneres}}
+		\vspace{0.5em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen Systems
+				\psdisk[fillcolor=gray!20](0, 0){0.75}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1.5}
+				\rput[b]{45}(1.68; 135){{\scriptsize\color{black} Einheitskreis}}
+				\pscircle[style=Dash, linecolor=gray](0, 0){.75}
+				\pspole(.75, 0){p1} \nput{-45}{p1}{$\tfrac{1}{2}$}
+				\pscircle[style=Dash, linecolor=gray](0, 0){2.25}
+				\pspole(-2.25, 0){p2} \nput{225}{p2}{$\scriptstyle-\tfrac{3}{2}$}
+			\end{pspicture}
+		}
+	\end{subfigure}
+\end{figure}
+
+\section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
 \begin{multicols}{2}
 	\fancyformula{Hintransformation}{
