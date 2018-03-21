@@ -443,6 +443,38 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	\item  $y(n)$ aus Anfangsbedingungen und $y^+(n)$  bestimmen
 \end{enumerate}
 
+\section*{Korrelationsanalyse}
+\begin{multicols}{2}
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Korrelation} der Signale $x(n)$, $y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
+		\[ r_{xy} = \alpha \sum_{n = 1}^N x(n) ~ y^*(n) \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
+
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Kovarianz} ($\hat =$ mittelwertbereinigte Korrelation) der Signale $x(n)$, $y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
+		\[ c_{xy} = \alpha \sum_{n = 1}^N (x(n) - m_x) ~ (y(n) - m_y)^* \]
+		\[ m_x = \frac{1}{N} \sum_{n = 1}^N x(n) \qquad m_y = \frac{1}{N} \sum_{n = 1}^N y(n) \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
+
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Varianz} des Signals $x(n) \in \mathbb C, ~ 1 \leq n \leq N$:
+		\[ c_{xx} = \alpha \sum_{n = 1}^N \left| x(n) - m_x \right|^2 \geq 0 \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
+
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Korrelationskoeffizient} (normierte Kovarianz) der Signale $x(n), y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
+		\[ \rho_{xy} = \frac{c_{xy}}{\sqrt{c_{xx} ~ c_{yy}}} \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
+\end{multicols}
+
 \section*{Mathematik}
 \subsection*{Summenformeln}
 \[ \sum_{k = M}^{N - 1} q^k = \frac{q^M - q^N}{1 - q}, ~ q \neq 1  \qquad \qquad \sum_{k = 0}^{\infty} q^k = \frac{1}{1 - q}, ~ |q| < 1 \]
