@@ -234,7 +234,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \]
 
 \begin{enumerate}
-\item \textbf{Polynomdivision} falls Zählergrad $\geq$ Nennergrad!
+\item \textbf{Polynomdivision} falls Zählergrad $\geq$ Nennergrad (``negativste'' Potenz zuerst)!
 \item \textbf{Partialbruchzerlegung} und Bestimmung der Koeffizienten wie herkömmlich oder mit Regeln:
 \begin{figure}[H]
 	\centering
@@ -257,8 +257,8 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 \end{enumerate}
 
-\subsection*{LTI-Systeme und $z$-Transformation}
-\subsubsection*{Übertragungsfunktion}
+\section*{LTI-Systeme / Filter und $z$-Transformation}
+\subsection*{Übertragungsfunktion}
 \[
 	y(n) = (h * x)(n) \ztransform Y(z) = H(z) ~ X(z)
 \]
@@ -267,7 +267,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \]
 	Differenzengleichung im Zeitbereich $\leftrightarrow H(z)$ rational mit Pol-und Nullstellen\\
 
-\subsubsection*{BIBO-Stabilität}
+\subsection*{BIBO-Stabilität}
 \begin{align*}
 	& \text{System ist BIBO-stabil} \\
 	\Leftrightarrow \quad & \textstyle \sum_{n=-\infty}^\infty |h(n)| < \infty
@@ -276,7 +276,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	& \Leftrightarrow \quad & \text{$h(n)$ ist antikausal und $|p_i| > 1 ~ \forall i$}
 \end{align*}
 
-\subsubsection*{Bezeichnungen FIR und IIR}
+\subsection*{Bezeichnungen FIR und IIR}
 \begin{center}
 	\begin{tabular}{r c p{8cm}}
 		\textbf{Bezeichnung} & \textbf{Übertragungsfunktion} & \textbf{Eigenschaften} \\ \hline \\[-1.0em]
@@ -286,7 +286,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	\end{tabular}
 \end{center}
 
-\subsubsection*{Stabilität und Kausalität im Pol-Nullstellen-Diagramm}
+\subsection*{Stabilität und Kausalität im Pol-Nullstellen-Diagramm}
 \vspace{-1.5em}
 \begin{figure}[H]
 	\begin{subfigure}[t]{0.33\textwidth}
@@ -359,6 +359,27 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 		}
 	\end{subfigure}
 \end{figure}
+
+\subsection*{Definionen $H \left(e^{j\omega} \right)$, $A(\omega)$, $\theta(\omega)$, $\tau_g(\omega)$}
+\vspace{-1.5em}
+\begin{multicols}{2}
+	\fancyformula{Frequenzgang}{
+		\[ H \left(e^{j\omega} \right) = H \left(z = e^{j \omega} \right) \]
+	}
+
+	\fancyformula{Amplitudengang}{
+		\[ A(\omega) = \left| H \left( e^{j \omega} \right) \right| \]
+	}
+
+	\fancyformula{Phasengang}{
+		\[ \theta(\omega) = \arg \left( H \left( e^{j \omega} \right) \right) \]
+	}
+
+	\fancyformula{Gruppenlaufzeit}{
+		\[ \tau_g(\omega) = - \frac{\mathrm d\theta(\omega)}{\mathrm d\omega} \]
+	}
+\end{multicols}
+
 
 \section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
