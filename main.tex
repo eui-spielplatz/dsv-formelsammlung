@@ -341,7 +341,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 		\scalebox{0.8}{
 			\begin{pspicture}(-3,-3)(3,3)
-				% KB des kausalen Systems
+				% KB des antikausalen Systems
 				\psdisk[fillcolor=gray!20](0, 0){0.75}
 
 				% Koordinatensystem
@@ -360,7 +360,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	\end{subfigure}
 \end{figure}
 
-\subsection*{Definionen $H \left(e^{j\omega} \right)$, $A(\omega)$, $\theta(\omega)$, $\tau_g(\omega)$}
+\subsection*{Definitionen $H \left(e^{j\omega} \right)$, $A(\omega)$, $\theta(\omega)$, $\tau_g(\omega)$}
 \vspace{-1.5em}
 \begin{multicols}{2}
 	\fancyformula{Frequenzgang}{
@@ -379,6 +379,105 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 		\[ \tau_g(\omega) = - \frac{\mathrm d\theta(\omega)}{\mathrm d\omega} \]
 	}
 \end{multicols}
+
+\subsection*{Kerbfilter}
+\vspace{-1.5em}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\textbf{FIR}-Kerbfilter hat nur Nullstelle:
+		\[
+			H(z) = c ~ (1 - 2 \cos(\omega_0) z^{-1} + z^{-2})
+		\]
+
+		\textbf{IIR}-Kerbfilter hat Polstelle mit $0 \ll r < 1$:
+		\[
+			H(z) = c ~ \frac{1 - 2 \cos(\omega_0) z^{-1} + z^{-2}}{1 - 2r ~ \cos(\omega_0) z^{-1} + r^2 ~ z^{-2}}
+		\]
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen, stabilen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.7, 2.7){1.838}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 45)
+				\psarc[style = Arrow, arrows = <->](0 ,0){1.0}{0}{45}
+				\rput(0.7; 22.5){$\omega_0$}
+
+				\psline[linestyle=dashed, linecolor=gray](3; -45)
+				\psarc[style = Arrow, arrows = <->](0 ,0){1.0}{-45}{0}
+				\rput(0.7; -22.5){$\omega_0$}
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){2}
+
+				% Polstellen
+				\pspole[linecolor=red](1.3, 1.3){p1} \nput{200}{p1}{\textcolor{red}{$\scriptstyle r e^{j\omega_0}$}}
+				\pspole[linecolor=red](1.3, -1.3){p1} \nput{160}{p1}{\textcolor{red}{$\scriptstyle r e^{-j\omega_0}$}}
+
+				% Nullstellen
+				\pszero(1.414, 1.414){z1} \nput{20}{z1}{$e^{j \omega_0}$}
+				\pszero(1.414, -1.414){z1} \nput{0}{z1}{$e^{-j \omega_0}$}
+			\end{pspicture}
+		}
+	\end{subfigure}
+\end{figure}
+
+\subsection*{Kammfilter}
+\vspace{-1.5em}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		Übertragungsfunktion des Kammfilters:
+		\[
+			H(z) = c ~ \frac{1 - z^{-N}}{1 - r ~ z^{-N}}
+		\]
+		Polstellen haben Betrag $|p_i| = \sqrt[N]{r}$
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen, stabilen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.7, 2.7){1.838}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 0)
+				\psline[linestyle=dashed, linecolor=gray](3; 72)
+				\psline[linestyle=dashed, linecolor=gray](3; 144)
+				\psline[linestyle=dashed, linecolor=gray](3; 216)
+				\psline[linestyle=dashed, linecolor=gray](3; 288)
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){2}
+
+				% Polstellen
+				\pspole[linecolor=red](1.8, 0){p0}
+				\pspole[linecolor=red](0.556, 1.712){p1}
+				\pspole[linecolor=red](-1.456, 1.058){p2}
+				\pspole[linecolor=red](-1.456, -1.058){p3}
+				\pspole[linecolor=red](0.556, -1.712){p4}
+
+				% Nullstellen
+				\pszero(2, 0){z0}
+				\pszero(0.618, 1.902){z1}
+				\pszero(-1.618, 1.176){z2}
+				\pszero(-1.618, -1.176){z3}
+				\pszero(0.618, -1.902){z4}
+			\end{pspicture}
+		}
+		\[ N = 5 \]
+	\end{subfigure}
+\end{figure}
 
 
 \section*{Einseitige $z$-Transformation}
