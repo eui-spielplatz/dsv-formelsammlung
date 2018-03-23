@@ -44,6 +44,9 @@
 \newcommand{\ztransformOneSided}{
 	~\xrightarrow{~\mathcal{Z^{+}}~}~
 }
+\newcommand{\dfttransform}{
+	~\xrightarrow{~\mathrm{DFT}_N~}~
+}
 
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\sgn}{sgn}
@@ -582,6 +585,149 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 % TODO: FFT
 % TODO: Zirkulare Faltung
 % TODO. Eventuell: Schnelle Faltung und Blockfilterungs-Algorithmen?
+
+\newpage
+\section*{Diskrete Fouriertransformation DFT}
+\subsection*{Definition}
+\vspace{-1.5em}
+\begin{multicols}{3}
+	\noindent
+	\[ X(k) = \sum_{n = 0}^{N - 1} x_p(n) ~ e^{-j\frac{2\pi}{N}kn} \]
+	\[ x_p(n) = \frac{1}{N} \sum_{k = 0}^{N - 1} X(k) ~ e^{j\frac{2\pi}{N}kn} \]
+	\[ \text{mit} ~~ x_p(n) = \sum_{l = -\infty}^{\infty} x(n + lN) \]
+\end{multicols}
+
+\subsection*{Eigenschaften (zirkular)}
+\vspace{-1.5em}
+\begin{multicols}{2}
+	\fancyformula{Nyquist-Bedingung}{
+		\[ \text{Länge von} ~ X(k) = N \geq L = \text{Länge von} ~ x(n) \]
+		\vspace{-2.0em}
+		\[ \Longrightarrow \text{Rekonstruktion von} ~ x(n) ~ \text{aus} ~ x_p(n) \]
+	}
+
+	\fancyformula{Spiegelung}{
+		\[x_p(-n) \dfttransform X(-k)\]
+	}
+
+	\fancyformula{Konjugiert komplex}{
+		\[x^{*}_{p}(n)\dfttransform X^{*}(-k)\]
+	}
+	\fancyformula{Linearität}{
+		\[ \sum_i c_i ~ x_{p, i}(n) \dfttransform \sum_i c_i ~ X_{i}(k) \]
+	}
+
+	\fancyformula{Symmetrie}{\begin{tabular}{r c l}
+		$x_p(n) ~ \text{gerade reell}$ & $\Longleftrightarrow$ & $ X(k) ~ \text{gerade reell}$ \\
+		$x_p(n) ~ \text{gerade imaginär}$ & $\Longleftrightarrow$ & $ X(k) ~ \text{gerade imaginär}$ \\
+		$x_p(n) ~ \text{ungerade reell}$ & $\Longleftrightarrow$ & $ X(k) ~ \text{ungerade imaginär}$ \\
+		$x_p(n) ~ \text{ungerade imaginär}$ & $\Longleftrightarrow$ & $X(k) ~ \text{ungerade reell}$
+	\end{tabular}}
+
+	\fancyformula{Periodizität}{
+		\[ x_p(n + N) = x_p(n) \qquad X(k+N)=X(k) \]
+	}
+
+	\fancyformula{Verschiebung}{
+		\[ x_p(n - n_0) \dfttransform e^{-j \frac{2\pi}{N} k n_0} ~ X(k) \]
+		\[ e^{j\frac{2\pi}{N} k_0 n} ~ x_p(n)\dfttransform X(k - k_0)\]
+	}
+
+	\fancyformula{Faltung}{
+		\[ \sum_{m = 0}^{N - 1} x_{p, 1}(m) ~ x_{p, 2}(n - m) \dfttransform X_{1}(k) ~ X_{2}(k)\]
+		\[ x_{p, 1}(n) ~ x_{p, 2}(n) \dfttransform \frac{1}{N} \sum_{m = 0}^{N - 1} X_{1}(m) ~ X_{2}(k - m) \]
+	}
+
+	\fancyformula{Parsevalsche Gleichung}{
+	\[ \sum_{n = 0}^{N - 1} x_{p, 1}(n) ~ x^{*}_{p, 2}(n) = \frac{1}{N} \sum_{k = 0}^{N - 1}X_{1}(k) ~ X^*_{2}(k) \]
+	}
+\end{multicols}
+
+\subsection*{DFT und iDFT als Matrixoperation}
+Mit \textbf{$\mathrm{DFT}_N$-Faktor} $w_N := e^{-\frac{2 \pi}{N}}$ schreibt sich die $\mathrm{DFT}_N$ als:
+
+{\footnotesize
+\[
+	\begin{pmatrix}
+		X(0)\\
+		X(1)\\
+		X(2)\\
+		X(3)\\
+		\vdots\\
+		X(N-1)
+	\end{pmatrix} = \begin{pmatrix}
+		w_{N}^0&w_{N}^0&w_{N}^0&w_{N}^0&\cdots&w_{N}^0\\
+		w_{N}^0&w_{N}^1&w_{N}^2&w_{N}^3&\cdots&w_{N}^{N-1}\\
+		w_{N}^0&w_{N}^2&w_{N}^4&w_{N}^6&\cdots&w_{N}^{2(N-1)}\\
+		w_{N}^0&w_{N}^3&w_{N}^6&w_{N}^9&\cdots&w_{N}^{3(N-1)}\\
+		\vdots&\vdots&\vdots&\vdots&&\vdots\\
+		w_{N}^0&w_{N}^{N-1}&w_{N}^{2(N-1)}&w_{N}^{3(N-1)}&\cdots&w_{N}^{(N-1)^2}
+	\end{pmatrix} \cdot \begin{pmatrix}
+		x(0)\\
+		x(1)\\
+		x(2)\\
+		x(3)\\
+		\vdots\\
+		x(N-1)\\
+		\end{pmatrix}
+\]}
+\[
+	\underline{\textbf{X}}_{N \times 1} = \underline{\underline{\textbf{W}}}_{N \times N} \cdot  \underline{\textbf{x}}_{N \times 1}
+\]
+
+\raggedright
+Analog die $\mathrm{iDFT}_N$:
+{\footnotesize
+\[
+	\begin{pmatrix}
+		x(0)\\
+		x(1)\\
+		x(2)\\
+		x(3)\\
+		\vdots\\
+		x(N-1)\\
+	\end{pmatrix} = \frac{1}{N} \begin{pmatrix}
+		w_{N}^0&w_{N}^0&w_{N}^0&w_{N}^0&\cdots&w_{N}^0\\
+		w_{N}^0&(w^{*}_{N})^1&(w^{*}_{N})^2&(w_{N}^{*})^3&\cdots&(w_{N}^*)^{N-1}\\
+		w_{N}^0&(w_{N}^{*})^2&(w^{*}_{N})^4&(w^{*}_{N})^6&\cdots&(w^{*}_{N})^{2(N-1)}\\
+		w_{N}^0&(w^{*}_{N})^3&(w^{*}_{N})^6&(w^{*}_{N})^9&\cdots&(w^{*}_{N})^{3(N-1)}\\
+		\vdots&\vdots&\vdots&\vdots&&\vdots\\
+		w_{N}^{0}&(w_{N}^{*})^{N-1}&(w_{N}^{*})^{2(N-1)}&(w_{N}^{*})^{3(N-1)}&\cdots&(w_{N}^{*})^{(N-1)^2}\\
+	\end{pmatrix} \cdot \begin{pmatrix}
+		X(0)\\
+		X(1)\\
+		X(2)\\
+		X(3)\\
+		\vdots\\
+		X(N-1)\\
+	\end{pmatrix}
+\]}
+\[
+	\underline{\textbf x}_{N \times 1} = \frac{1}{N} ~ \underline{\underline{\textbf W}}^H_{N \times N} \cdot \underline{\textbf X}_{N \times 1}
+\]
+\vspace{0.5em}
+\begin{multicols}{2}
+	\noindent
+	\fancyformula{Beispiel $\mathrm{DFT}_4$}{\[
+		\underline{\underline{W}}=
+		\begin{pmatrix}
+			1&1&1&1\\
+			1&-j&-1&j\\
+			1&-1&1&-1\\
+			1&j&-1&-j\\
+		\end{pmatrix}
+	\]}
+
+	\fancyformula{Beispiel $\mathrm{iDFT}_4$}{\[
+		\frac{1}{N} ~ \underline{\underline{W}}^{H} = \frac{1}{N} ~
+		\begin{pmatrix}
+			1&1&1&1\\
+			1&j&-1&-j\\
+			1&-1&1&-1\\
+			1&-j&-1&j\\
+		\end{pmatrix}
+	\]}
+\end{multicols}
 
 \section*{Mathematik}
 \subsection*{Summenformeln}
