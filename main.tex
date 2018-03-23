@@ -242,13 +242,13 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \begin{figure}[H]
 	\centering
 	\setlength{\fboxsep}{10pt}
-	\begin{adjustbox}{valign=h,center=0.42\textwidth,margin=1ex,minipage=[t][][t]{0.37\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.42\textwidth,margin=1ex,minipage=[t][][t]{0.37\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		Koeffizient $c_i$ für \textbf{einfache Polstelle} $p_i$
 		\[ \frac{\beta(z^{-1})}{\alpha(z^{-1})} = \frac{c_1}{1 - p_1 z^{-1}} + \cdots + \frac{c_N}{1 - p_N z^{-1}} \]
 		\[ c_i = \frac{\beta(z^{-1})}{\alpha(z^{-1})} ~ (1 - p_i z^{-1}) \bigg |_{z = p_{i}} \]
 		\vspace{3.8em}
 	\end{adjustbox}
-	\begin{adjustbox}{valign=h,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		Koeffizienten $c_1, \ldots, c_m$ für \textbf{m-fache Polstellen} $p_1, \ldots, p_m$
 		\[ \frac{\beta(z^{-1})}{\alpha(z^{-1})}=\frac{c_{1}}{1-p_{1}z^{-1}}+\cdots+\frac{c_{m}}{(1-p_{1}z^{-1})^m} + \ldots \]
 		\[ c_{m - i} = \frac{1}{i! ~ (-p_1)^{i}}\frac{\mathrm d^{i} \gamma(w)}{\mathrm d w^{i}} \bigg |_{w = p_1^{-1}} \text{mit} ~ 0 \leq i < m \]
@@ -575,13 +575,28 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
+
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Kreuzkorrelationsfunktion} zwischen Signalen $x(n) \in \mathbb C, 1 \leq n \leq M$ und $y(n) \in \mathbb C, 1 \leq n \leq N$ mit $M > N$:
+		\[ r_{xy}(k) = \alpha \sum_{n = 1}^N x(n + k) ~ y^*(n), \quad 0 \leq k \leq M - N \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
+
+	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+		\textbf{Kreuzkovarianzfunktion} zwischen Signalen $x(n) \in \mathbb C, 1 \leq n \leq M$ und $y(n) \in \mathbb C, 1 \leq n \leq N$ mit $M > N$:
+		\footnotesize
+		\[ c_{xy}(k) = \alpha \sum_{n = 1}^N \tilde x(n + k) ~ \tilde y^*(n), \quad 0 \leq k \leq M - N \]
+		\[ \tilde x(n + k) = x(n + k) - m_x \qquad \tilde y(n) = y(n) - m_y \]
+		\[ m_x(k) = \frac{1}{N} \sum_{n = 1}^N x(n+k) \qquad m_y = \frac{1}{N} \sum_{n = 1}^N y(n) \]
+
+		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
+	\end{adjustbox}
 \end{multicols}
 
 % TODO: Kreuzkorrelationsfunktion und Kreuzkoviaranzfunktion
 % TODO: Allpass
 % TODO: Minimalphasig, Maximalphasig, Linearphasig
-% TODO: DFT
-% TODO: DFT als Matrix-Vektor-Operation
 % TODO: FFT
 % TODO: Zirkulare Faltung
 % TODO. Eventuell: Schnelle Faltung und Blockfilterungs-Algorithmen?
