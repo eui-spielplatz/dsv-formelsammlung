@@ -482,6 +482,101 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 	\end{subfigure}
 \end{figure}
 
+\subsection*{Allpass}
+\vspace{-1.5em}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\begin{itemize}
+			\item Amplitudengang: $A(\omega) = \mathrm{const.} ~ \forall \omega$
+			\item Pol- und Nullstellen symmetrisch zum Einheitskreis:
+			\[
+				n_i = \frac{1}{p_i^*}
+			\]
+			\item Kausaler, stabiler Allpass: $\tau_g(\omega) \geq 0 ~ \forall \omega$
+			\item Polynome in Übertragungsfunktion $\beta(z^{-1})$, $\alpha(z^{-1})$ haben gleiche Ordnung:
+			\[
+				H(z) = \frac{\beta(z^{-1})}{\alpha(z^{-1})}
+			\]
+		\end{itemize}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen, stabilen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.7, 2.7){1.414}
+
+				% Koordinatensystem
+				\psaxeslabels{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 45)
+				\psline[linestyle=dashed, linecolor=gray](3; 116.56)
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1}
+
+				% Polstellen
+				\pspole(1, 1){p0}
+				\pspole(-0.2, 0.4){p1}
+
+				% Nullstellen
+				\pszero(0.5, 0.5){z0}
+				\pszero(-1, 2){z1}
+
+			\end{pspicture}
+		}
+	\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[t]{0.48\textwidth}
+		\subsection*{Minimalphasig}
+		Für kausales, stabiles, minimalphasiges Filter gilt:
+		\[
+			|p_i| < 1 \qquad |n_i| < 1
+		\]
+		Filter hat \textit{kleinste Gruppenlaufzeit} aller Filter mit gleichem Amplitudengang ($A(\omega) = A_{\mathrm{min}}(\omega)$) und \textit{größte partielle Energie}:
+		\[
+			\tau_g(\omega) \geq \tau_{g, \mathrm{min}}(\omega) ~~ \forall \omega
+		\]
+		\[
+			\sum_{n = 0}^L |h(n)|^2 \leq \sum_{n = 0}^L |h_{\mathrm{min}}(n)|^2 ~~ \forall L \geq 0
+		\]
+	\end{subfigure}
+	\hspace{0.02\textwidth}
+	\begin{subfigure}[t]{0.48\textwidth}
+		\subsection*{Maximalphasig}
+		Für kausales, stabiles, maximalphasiges Filter gilt:
+		\[
+			|p_i| < 1 \qquad |n_i| > 1
+		\]
+		Filter hat \textit{größte Gruppenlaufzeit} aller Filter mit gleichem Amplitudengang ($A(\omega) = A_{\mathrm{max}}(\omega)$) und \textit{kleinste partielle Energie}:
+		\[
+			\tau_g(\omega) \leq \tau_{g, \mathrm{max}}(\omega) ~~ \forall \omega
+		\]
+		\[
+			\sum_{n = 0}^L |h(n)|^2 \geq \sum_{n = 0}^L |h_{\mathrm{max}}(n)|^2 ~~ \forall L \geq 0
+		\]
+	\end{subfigure}
+\end{figure}
+\raggedright
+Sonst: Filter hat ``gemischte Phase''.
+
+\subsection*{Linearphasig}
+\[
+	H(e^{j\omega}) \overset{!}{=} H_0(\omega) ~ e^{j (\theta_0 - \omega \alpha)}, \quad H_0(\omega) \in \mathbb R
+	\quad \Longleftrightarrow \quad
+	\tau_g(\omega) = -\frac{\mathrm d \theta(\omega)}{\mathrm d\omega} = \alpha = \mathrm{const.}
+\]
+\begin{center}
+	$\forall \omega$, wo $\theta(\omega)$ differenzierbar
+\end{center}
+
+% TODO: Typen von linearphasigen FIR-Filtern??
+% TODO: Zerlegung in Allpass + Minimalphasiges Filter
 
 \section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
