@@ -690,8 +690,6 @@ Sonst: Filter hat ``gemischte Phase''.
 	\end{adjustbox}
 \end{multicols}
 
-% TODO: Allpass
-% TODO: Minimalphasig, Maximalphasig, Linearphasig
 % TODO: FFT
 % TODO: Zirkulare Faltung
 % TODO. Eventuell: Schnelle Faltung und Blockfilterungs-Algorithmen?
@@ -838,6 +836,32 @@ Analog die $\mathrm{iDFT}_N$:
 		\end{pmatrix}
 	\]}
 \end{multicols}
+
+\section*{Zirkulare Faltung}
+Zirkulare Faltung der Länge $N$ der Signale $x_1(n)$ mit $0 \leq n \leq N_1$ und $x_2(n)$ mit $0 \leq n \leq N_2$ ist gegeben durch
+\[
+	(x_1 \circledast x_2)(n) = \sum_{m = 0}^{N - 1} x_{p, 1}(m) ~ x_{p, 2}(n - m)
+\]
+mit $n \geq \max \{ N_1, N_2 \}$ und $x_{p, i}$ \ldots periodische Fortsetzungen:
+\[
+	x_{p, i} = \sum_{l = -\infty}^\infty x_i(n + lN) = x_i(m \bmod N)
+\]
+
+Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 = \text{Länge von $(x_1 * x_2)(n)$}$.
+
+\subsection*{Rechenbeispiel}
+\[
+	x(n) = \left \{ \underset{\uparrow}{1}, 2, 3, 4 \right \} \qquad h(n) = \left \{ \underset{\uparrow}{1}, 2, 1 \right \} \qquad y(n) = (x \circledast h)(n)
+\]
+
+\begin{center}
+	\begin{tabular}{r | c c c c}
+		$h_p(0) ~ x_p(n)$ & 1 & 2 & 3 & 4 \\
+		$h_p(1) ~ x_p(n - 1)$ & 8 & 2 & 4 & 6 \\
+		$h_p(2) ~ x_p(n - 2)$ & 3 & 4 & 1 & 2 \\ \hline
+		$y(n)$ & 12 & 8 & 8 & 12
+	\end{tabular}
+\end{center}
 
 \section*{Mathematik}
 \subsection*{Summenformeln}
