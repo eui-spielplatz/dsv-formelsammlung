@@ -575,8 +575,136 @@ Sonst: Filter hat ``gemischte Phase''.
 	$\forall \omega$, wo $\theta(\omega)$ differenzierbar
 \end{center}
 
+\subsection*{Zerlegung: Allpass und minimalphasiges Filter}
+Jedes beliebige \textit{kausale und stabile} Filter kann ein ein minimalphasiges Filter und einen Allpass zerlegt werden.
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.3\textwidth}
+		\small\centering{\sffamily\textbf{Gesamtes Filter}}
+		\vspace{1em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen, stabilen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.7, 2.7){0.447}
+
+				% Koordinatensystem
+				\psaxeslabels[linecolor=black!70]{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 45)
+				\psline[linestyle=dashed, linecolor=gray](3; 116.56)
+				\psline[linestyle=dashed, linecolor=gray](3; -45)
+				\psline[linestyle=dashed, linecolor=gray](3; -116.56)
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1}
+
+				% Polstellen
+				\pspole(-0.2, 0.4){p0}
+				\pspole(-0.2, -0.4){p1}
+				\pspole(0, 0){p2} \nput{180}{p2}{$2$}
+
+				% Nullstellen
+				\pszero(1, 1){z0}
+				\pszero(-1, 2){z1}
+				\pszero(1, -1){z2}
+				\pszero(-1, -2){z3}
+				\pszero(0.5, 0){z4}
+			\end{pspicture}
+		}
+
+		\raggedright
+		Minimalphasiges Filter ist wie Gesamtfilter, aber mit Nullstellen $|n_i| > 1$ nach innen gespiegelt. Der Allpass kompensiert gespiegelte Nullstellen wieder.
+	\end{subfigure}
+	\begin{subfigure}[t]{0.05\textwidth}
+		\vspace{4.5em}
+		\Huge \[ = \]
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\small\centering{\sffamily\textbf{Minimalphasiges Filter}}
+		\vspace{1em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% Koordinatensystem
+				\psaxeslabels[linecolor=black!70]{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 45)
+				\psline[linestyle=dashed, linecolor=gray](3; 116.56)
+				\psline[linestyle=dashed, linecolor=gray](3; -45)
+				\psline[linestyle=dashed, linecolor=gray](3; -116.56)
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1}
+
+				% Polstellen
+				\pspole(0, 0){p2} \nput{180}{p2}{$2$}
+
+				% Nullstellen
+				\pszero(0.5, 0.5){z0}
+				\pszero(0.5, -0.5){z1}
+				\pszero(0.5, 0){z2}
+			\end{pspicture}
+		}
+
+		\raggedright
+		Nullstellen mit $|n_i| > 1$ nach innen spiegeln:
+		\[
+			n_{i, \mathrm{min}} = \frac{1}{n_i^*}
+		\]
+	\end{subfigure}
+	\begin{subfigure}[t]{0.03\textwidth}
+		\vspace{4.5em}
+		\Huge \[ \cdot \]
+	\end{subfigure}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\small\centering{\sffamily\textbf{Allpass}}
+		\vspace{1em}
+
+		\scalebox{0.8}{
+			\begin{pspicture}(-3,-3)(3,3)
+				% KB des kausalen, stabilen Systems
+				\psdiskc[fillcolor=gray!20](0,0)(2.7, 2.7){0.447}
+
+				% Koordinatensystem
+				\psaxeslabels[linecolor=black!70]{->}(0,0)(-3, -3)(3, 3){$\Re$}{$\Im$}
+
+				% Winkel-Linien
+				\psline[linestyle=dashed, linecolor=gray](3; 45)
+				\psline[linestyle=dashed, linecolor=gray](3; 116.56)
+				\psline[linestyle=dashed, linecolor=gray](3; -45)
+				\psline[linestyle=dashed, linecolor=gray](3; -116.56)
+
+				% Einheitskreis
+				\psset{linecolor=black, labelsep=.05}
+				\pscircle(0, 0){1}
+
+				% Polstellen
+				\pspole(-0.2, 0.4){p0}
+				\pspole(-0.2, -0.4){p1}
+				\pspole(0.5, 0.5){p2}
+				\pspole(0.5, -0.5){p3}
+
+				% Nullstellen
+				\pszero(1, 1){z0}
+				\pszero(-1, 2){z1}
+				\pszero(1, -1){z2}
+				\pszero(-1, -2){z3}
+			\end{pspicture}
+		}
+
+		\raggedright
+		Nullstellen des minimalphasigen Filters mit Polstellen kompensieren:
+		\[
+			p_{i, \mathrm{all}} = n_{i, \mathrm{min}} = \frac{1}{n_i^*}
+		\]
+	\end{subfigure}
+\end{figure}
+
 % TODO: Typen von linearphasigen FIR-Filtern??
-% TODO: Zerlegung in Allpass + Minimalphasiges Filter
 
 \section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
