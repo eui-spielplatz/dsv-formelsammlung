@@ -12,6 +12,7 @@
 \usepackage{array}
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{stackengine}
 \usepackage{adjustbox}
 \usepackage{float}
 \usepackage[left=2cm, right=2.60cm, top=2cm, bottom=2.50cm]{geometry}
@@ -63,6 +64,7 @@
 \titleformat*{\subsubsection}{\sffamily\normalsize\bfseries}
 
 \begin{document}
+\fancythumb{$\mathcal Z$-Trafo}{red}
 \section*{Zweiseitige $z$-Transformation}
 \subsection*{Definition}
 \vspace{-1.5em}
@@ -260,6 +262,8 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 
 \end{enumerate}
 
+\newpage
+\fancythumb{Filter}{black}
 \section*{LTI-Systeme / Filter und $z$-Transformation}
 \subsection*{Übertragungsfunktion}
 \[
@@ -384,7 +388,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \end{multicols}
 
 \subsection*{Kerbfilter}
-\vspace{-1.5em}
+\vspace{-2em}
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
@@ -433,7 +437,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \end{figure}
 
 \subsection*{Kammfilter}
-\vspace{-1.5em}
+\vspace{-2em}
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
@@ -483,7 +487,7 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 \end{figure}
 
 \subsection*{Allpass}
-\vspace{-1.5em}
+\vspace{-2em}
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
@@ -529,6 +533,8 @@ Bringe durch Ausmultiplizieren oder Potenzreihenenwicklung auf Form:
 		}
 	\end{subfigure}
 \end{figure}
+
+\vspace{-1em}
 
 \begin{figure}[H]
 	\centering
@@ -706,6 +712,8 @@ Jedes beliebige \textit{kausale und stabile} Filter kann ein ein minimalphasiges
 
 % TODO: Typen von linearphasigen FIR-Filtern??
 
+\newpage
+\fancythumb{$\mathcal Z^+$-Trafo}{blue}
 \section*{Einseitige $z$-Transformation}
 \subsection*{Definition}
 \vspace{-1.5em}
@@ -768,17 +776,19 @@ Jedes beliebige \textit{kausale und stabile} Filter kann ein ein minimalphasiges
 	\item  $y(n)$ aus Anfangsbedingungen und $y^+(n)$  bestimmen
 \end{enumerate}
 
+\newpage
+\fancythumb{$ (x ~ \stackanchor{$\star$}{$\circledast$} ~ y)(n) $}{teal}
 \section*{Korrelationsanalyse}
 \vspace{-1.5em}
 \begin{multicols}{2}
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Korrelation} der Signale $x(n)$, $y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
 		\[ r_{xy} = \alpha \sum_{n = 1}^N x(n) ~ y^*(n) \]
 
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
 
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Kovarianz} ($\hat =$ mittelwertbereinigte Korrelation) der Signale $x(n)$, $y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
 		\[ c_{xy} = \alpha \sum_{n = 1}^N (x(n) - m_x) ~ (y(n) - m_y)^* \]
 		\[ m_x = \frac{1}{N} \sum_{n = 1}^N x(n) \qquad m_y = \frac{1}{N} \sum_{n = 1}^N y(n) \]
@@ -786,28 +796,28 @@ Jedes beliebige \textit{kausale und stabile} Filter kann ein ein minimalphasiges
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
 
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Varianz} des Signals $x(n) \in \mathbb C, ~ 1 \leq n \leq N$:
 		\[ c_{xx} = \alpha \sum_{n = 1}^N \left| x(n) - m_x \right|^2 \geq 0 \]
 
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
 
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Korrelationskoeffizient} (normierte Kovarianz) der Signale $x(n), y(n) \in \mathbb C, ~ 1 \leq n \leq N$:
 		\[ \rho_{xy} = \frac{c_{xy}}{\sqrt{c_{xx} ~ c_{yy}}} \]
 
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
 
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Kreuzkorrelationsfunktion} zwischen Signalen $x(n) \in \mathbb C, 1 \leq n \leq M$ und $y(n) \in \mathbb C, 1 \leq n \leq N$ mit $M > N$:
 		\[ r_{xy}(k) = \alpha \sum_{n = 1}^N x(n + k) ~ y^*(n), \quad 0 \leq k \leq M - N \]
 
 		Wähle üblicherweise $\alpha = 1$ oder $\alpha = \frac{1}{N}$
 	\end{adjustbox}
 
-	\begin{adjustbox}{valign=t,center=0.48\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
+	\begin{adjustbox}{valign=t,center=0.45\textwidth,margin=1ex,minipage=[t][][t]{0.43\textwidth},bgcolor=white,cfbox=black 1.5pt 0pt 1pt}
 		\textbf{Kreuzkovarianzfunktion} zwischen Signalen $x(n) \in \mathbb C, 1 \leq n \leq M$ und $y(n) \in \mathbb C, 1 \leq n \leq N$ mit $M > N$:
 		\footnotesize
 		\[ c_{xy}(k) = \alpha \sum_{n = 1}^N \tilde x(n + k) ~ \tilde y^*(n), \quad 0 \leq k \leq M - N \]
@@ -818,10 +828,23 @@ Jedes beliebige \textit{kausale und stabile} Filter kann ein ein minimalphasiges
 	\end{adjustbox}
 \end{multicols}
 
+\section*{Zirkulare Faltung}
+Zirkulare Faltung der Länge $N$ der Signale $x_1(n)$ mit $0 \leq n \leq N_1$ und $x_2(n)$ mit $0 \leq n \leq N_2$ ist gegeben durch
+\[
+	(x_1 \circledast x_2)(n) = \sum_{m = 0}^{N - 1} x_{p, 1}(m) ~ x_{p, 2}(n - m)
+\]
+mit $n \geq \max \{ N_1, N_2 \}$ und $x_{p, i}$ \ldots periodische Fortsetzungen:
+\[
+	x_{p, i} = \sum_{l = -\infty}^\infty x_i(n + lN) = x_i(m \bmod N)
+\]
+
+Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 = \text{Länge von $(x_1 * x_2)(n)$}$.
+
 % TODO: FFT
 % TODO. Eventuell: Schnelle Faltung und Blockfilterungs-Algorithmen?
 
 \newpage
+\fancythumb{DFT}{brown}
 \section*{Diskrete Fouriertransformation DFT}
 \subsection*{Definition}
 \vspace{-1.5em}
@@ -964,18 +987,6 @@ Analog die $\mathrm{iDFT}_N$:
 	\]}
 \end{multicols}
 
-\section*{Zirkulare Faltung}
-Zirkulare Faltung der Länge $N$ der Signale $x_1(n)$ mit $0 \leq n \leq N_1$ und $x_2(n)$ mit $0 \leq n \leq N_2$ ist gegeben durch
-\[
-	(x_1 \circledast x_2)(n) = \sum_{m = 0}^{N - 1} x_{p, 1}(m) ~ x_{p, 2}(n - m)
-\]
-mit $n \geq \max \{ N_1, N_2 \}$ und $x_{p, i}$ \ldots periodische Fortsetzungen:
-\[
-	x_{p, i} = \sum_{l = -\infty}^\infty x_i(n + lN) = x_i(m \bmod N)
-\]
-
-Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 = \text{Länge von $(x_1 * x_2)(n)$}$.
-
 \subsection*{Rechenbeispiel}
 \[
 	x(n) = \left \{ \underset{\uparrow}{1}, 2, 3, 4 \right \} \qquad h(n) = \left \{ \underset{\uparrow}{1}, 2, 1 \right \} \qquad y(n) = (x \circledast h)(n)
@@ -990,6 +1001,8 @@ Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 =
 	\end{tabular}
 \end{center}
 
+\newpage
+\fancythumb{Mathe}{Green}
 \section*{Mathematik}
 \subsection*{Additionstheoreme}
 \begin{multicols}{2}
