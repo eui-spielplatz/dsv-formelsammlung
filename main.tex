@@ -840,6 +840,20 @@ mit $n \geq \max \{ N_1, N_2 \}$ und $x_{p, i}$ \ldots periodische Fortsetzungen
 
 Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 = \text{Länge von $(x_1 * x_2)(n)$}$.
 
+\subsection*{Rechenbeispiel}
+\[
+	x(n) = \left \{ \underset{\uparrow}{1}, 2, 3, 4 \right \} \qquad h(n) = \left \{ \underset{\uparrow}{1}, 2, 1 \right \} \qquad y(n) = (x \circledast h)(n)
+\]
+
+\begin{center}
+	\begin{tabular}{r | c c c c}
+		$h_p(0) ~ x_p(n)$ & 1 & 2 & 3 & 4 \\
+		$h_p(1) ~ x_p(n - 1)$ & 8 & 2 & 4 & 6 \\
+		$h_p(2) ~ x_p(n - 2)$ & 3 & 4 & 1 & 2 \\ \hline
+		$y(n)$ & 12 & 8 & 8 & 12
+	\end{tabular}
+\end{center}
+
 % TODO: FFT
 % TODO. Eventuell: Schnelle Faltung und Blockfilterungs-Algorithmen?
 
@@ -986,20 +1000,6 @@ Analog die $\mathrm{iDFT}_N$:
 		\end{pmatrix}
 	\]}
 \end{multicols}
-
-\subsection*{Rechenbeispiel}
-\[
-	x(n) = \left \{ \underset{\uparrow}{1}, 2, 3, 4 \right \} \qquad h(n) = \left \{ \underset{\uparrow}{1}, 2, 1 \right \} \qquad y(n) = (x \circledast h)(n)
-\]
-
-\begin{center}
-	\begin{tabular}{r | c c c c}
-		$h_p(0) ~ x_p(n)$ & 1 & 2 & 3 & 4 \\
-		$h_p(1) ~ x_p(n - 1)$ & 8 & 2 & 4 & 6 \\
-		$h_p(2) ~ x_p(n - 2)$ & 3 & 4 & 1 & 2 \\ \hline
-		$y(n)$ & 12 & 8 & 8 & 12
-	\end{tabular}
-\end{center}
 
 \newpage
 \fancythumb{Mathe}{Green}
