@@ -135,7 +135,7 @@
 	{\small\raggedright\sffamily\textbf{Eindeutigkeit}}
 	\[
 		\begin{tikzcd}[every arrow/.append style={shift left}, column sep = 9em]
-			x(n) \arrow{r}{\text{eindeutig}} & X(z) \arrow{l}{\text{nur mit\newline KB eindeutig}}
+			x(n) \arrow{r}{\text{eindeutig}} & X(z) \arrow{l}{\text{nur mit KB eindeutig}}
 		\end{tikzcd}
 	\]
 
@@ -835,7 +835,7 @@ Zirkulare Faltung der Länge $N$ der Signale $x_1(n)$ mit $0 \leq n \leq N_1$ un
 \]
 mit $n \geq \max \{ N_1, N_2 \}$ und $x_{p, i}$ \ldots periodische Fortsetzungen:
 \[
-	x_{p, i} = \sum_{l = -\infty}^\infty x_i(n + lN) = x_i(m \bmod N)
+	x_{p, i} = \sum_{l = -\infty}^\infty x_i(n + lN_i) = x_i(m \bmod N_i)
 \]
 
 Damit zirkulare Faltung $\equiv$ lineare Faltung, wähle $N \geq N_1 + N_2 - 1 = \text{Länge von $(x_1 * x_2)(n)$}$.
