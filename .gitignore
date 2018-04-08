@@ -2,12 +2,4 @@
 !.gitignore
 !README.md
 !main.tex
-!img
-img/*
-!img/*.png
-!img/*.svg
-!img/*.pdf
-!src
-src/*
-!src/*.odg
-!src/*.m
+!main.pdf
